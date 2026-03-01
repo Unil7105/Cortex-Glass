@@ -15,7 +15,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000000);
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
-camera.position.set(0, 0, 5);
+camera.position.set(100, -10, 78);
 
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
@@ -33,7 +33,7 @@ scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).textur
 
 // 2. Post-processing (Bloom)
 const renderScene = new RenderPass(scene, camera);
-const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.0, 0.4, 0.85);
+const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.205, 0.4, 0.9);
 const outputPass = new OutputPass();
 
 const composer = new EffectComposer(renderer);
@@ -124,7 +124,7 @@ const params = {
 
   // Performance & Settings
   enableBloom: true,
-  bloomIntensity: 1,
+  bloomIntensity: 0.05,
   enableToneMapping: true,
   meshDetail: 1,
   enableShadows: true,
@@ -223,7 +223,7 @@ function updateShaders() {
 
   // Add emissive tint to mimic iridescence/caustic glow
   const rCol = new THREE.Color(params.iridescenceColor);
-  glassMaterial.emissive.copy(rCol).multiplyScalar(params.iridescenceIntensity * 0.1);
+  glassMaterial.emissive.copy(rCol).multiplyScalar(params.iridescenceIntensity * 0.02);
 }
 
 // Controls
