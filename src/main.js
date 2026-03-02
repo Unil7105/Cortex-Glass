@@ -68,7 +68,8 @@ const glassMaterial = new THREE.MeshPhysicalMaterial({
   iridescence: 1.0,
   iridescenceIOR: 1.5,
   attenuationColor: new THREE.Color(0xffffff),
-  attenuationDistance: 0.8
+  attenuationDistance: 0.8,
+  dispersion: 1.0 // Adds color-sensitive dispersion (chromatic aberration)
 });
 
 // Custom Shader/Colors to mimic iridescence + SSS
@@ -144,6 +145,7 @@ const params = {
   transmission: 1,
   thickness: 1.5,
   ior: 1.5,
+  dispersion: 1,
   opacity: 1,
   envMapIntensity: 1,
 
@@ -204,6 +206,7 @@ gMat.add(params, 'clearcoatRoughness', 0, 1).name('clearcoatRoughness').onChange
 gMat.add(params, 'transmission', 0, 1).name('transmission').onChange(v => glassMaterial.transmission = v);
 gMat.add(params, 'thickness', 0, 5).name('thickness').onChange(v => glassMaterial.thickness = v);
 gMat.add(params, 'ior', 1, 2.3).name('ior').onChange(v => glassMaterial.ior = v);
+gMat.add(params, 'dispersion', 0, 5).name('dispersion').onChange(v => glassMaterial.dispersion = v);
 gMat.add(params, 'opacity', 0, 1).name('opacity').onChange(v => glassMaterial.opacity = v);
 gMat.add(params, 'envMapIntensity', 0, 5).name('envMapIntensity').onChange(v => glassMaterial.envMapIntensity = v);
 
